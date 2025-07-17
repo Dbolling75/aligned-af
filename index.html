@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift Your Circle. Shift Your Life.</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'terracotta': '#D99173',
+                        'soft-gold': '#F6E3B4',
+                        'lavender': '#C6B4E3',
+                        'ivory': '#FDFCF9',
+                        'deep-ink': '#2B2D42'
+                    },
+                    fontFamily: {
+                        'serif': ['DM Serif Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                        'script': ['Dancing Script', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-ivory text-deep-ink font-sans">
+    <!-- Home Screen -->
+    <div id="home-screen" class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-terracotta to-lavender p-6 text-center">
+            <h1 class="font-serif text-4xl md:text-6xl text-white mb-4">Shift Your Circle. Shift Your Life.</h1>
+            <p class="text-xl md:text-2xl text-ivory font-light">Use the law of proximity to move faster, with more clarity and less chaos.</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-6 py-12">
+            <!-- Tool Options -->
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Proximity Pulse Check -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow cursor-pointer border-2 border-transparent hover:border-terracotta" onclick="showProximityCheck()">
+                    <div class="text-4xl mb-4">🔍</div>
+                    <h3 class="font-serif text-2xl mb-4 text-terracotta">Proximity Pulse Check</h3>
+                    <p class="text-gray-600">Discover if your current circle is aligned with your goals through a quick assessment.</p>
+                </div>
+
+                <!-- Goal Filter -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow cursor-pointer border-2 border-transparent hover:border-lavender" onclick="showGoalFilter()">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="font-serif text-2xl mb-4 text-lavender">Goal Filter</h3>
+                    <p class="text-gray-600">Get personalized insights on who and what to focus on to reach your specific goal.</p>
+                </div>
+
+                <!-- Daily Win Generator -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow cursor-pointer border-2 border-transparent hover:border-soft-gold" onclick="showDailyWin()">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="font-serif text-2xl mb-4" style="color: #D4A574;">Daily Win Generator</h3>
+                    <p class="text-gray-600">Get instant, actionable nudges to shift your energy and momentum today.</p>
+                </div>
+            </div>
+
+            <!-- What is Law of Proximity -->
+            <div class="text-center mb-12">
+                <button onclick="showLawInfo()" class="text-terracotta hover:text-deep-ink font-medium underline text-lg">
+                    What is the Law of Proximity? ✨
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-deep-ink text-ivory p-6 text-center">
+            <p class="font-script text-xl mb-2">Empathic AI Solutions</p>
+            <p class="text-sm opacity-75">Transforming overwhelm into clarity, one connection at a time</p>
+        </footer>
+    </div>
+
+    <!-- Proximity Pulse Check Screen -->
+    <div id="proximity-check" class="min-h-screen hidden">
+        <header class="bg-gradient-to-r from-terracotta to-pink-400 p-6 text-center">
+            <h1 class="font-serif text-4xl text-white mb-2">🔍 Proximity Pulse Check</h1>
+            <p class="text-ivory">Let's see how aligned your current circle is</p>
+        </header>
+
+        <main class="container mx-auto px-6 py-12">
+            <div class="max-w-2xl mx-auto">
+                <div id="question-container" class="bg-white rounded-2xl p-8 shadow-lg">
+                    <div id="question-1" class="question-step">
+                        <h3 class="font-serif text-2xl mb-6 text-center">Who do you spend the most time with?</h3>
+                        <div class="space-y-4">
+                            <button onclick="selectAnswer(1, 'supportive')" class="w-full p-4 text-left bg-gray-50 hover:bg-terracotta hover:text-white rounded-lg transition-colors">
+                                People who encourage and challenge me to grow
+                            </button>
+                            <button onclick="selectAnswer(1, 'neutral')" class="w-full p-4 text-left bg-gray-50 hover:bg-terracotta hover:text-white rounded-lg transition-colors">
+                                A mix of supportive and draining people
+                            </button>
+                            <button onclick="selectAnswer(1, 'draining')" class="w-full p-4 text-left bg-gray-50 hover:bg-terracotta hover:text-white rounded-lg transition-colors">
+                                People who complain, gossip, or discourage my dreams
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="question-2" class="question-step hidden">
+                        <h3 class="font-serif text-2xl mb-6 text-center">Do they stretch or shrink your goals?</h3>
+                        <div class="space-y-4">
+                            <button onclick="selectAnswer(2, 'stretch')" class="w-full p-4 text-left bg-gray-50 hover:bg-terracotta hover:text-white rounded-lg transition-colors">
+                                They inspire me to dream bigger and take action
+                            </button>
+                            <button onclick="selectAnswer(2, 'neutral')" class="w-full p-4 text-left bg-gray-50 hover:bg-terracotta hover:text-white rounded-lg transition-colors">
+                                They're supportive but don't really push me
+                            </button>
+                            <button onclick="selectAnswer(2, 'shrink')" class="w-full p-4 text-left bg-gray-50 hover:bg-terracotta hover:text-white rounded-lg transition-colors">
+                                They make me feel like my goals are unrealistic
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="question-3" class="question-step hidden">
+                        <h3 class="font-serif text-2xl mb-6 text-center">How often do you feel energized by your environment?</h3>
+                        <div class="space-y-4">
+                            <button onclick="selectAnswer(3, 'often')" class="w-full p-4 text-left bg-gray-50 hover:bg-terracotta hover:text-white rounded-lg transition-colors">
+                                Most of the time - I'm in spaces that lift me up
+                            </button>
+                            <button onclick="selectAnswer(3, 'sometimes')" class="w-full p-4 text-left bg-gray-50 hover:bg-terracotta hover:text-white rounded-lg transition-colors">
+                                Sometimes - it depends on where I am
+                            </button>
+                            <button onclick="selectAnswer(3, 'rarely')" class="w-full p-4 text-left bg-gray-50 hover:bg-terracotta hover:text-white rounded-lg transition-colors">
+                                Rarely - I often feel drained by my surroundings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button onclick="goHome()" class="text-terracotta hover:text-deep-ink font-medium">← Back to Home</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="results-screen" class="min-h-screen hidden">
+        <header class="p-6 text-center" id="results-header">
+            <h1 class="font-serif text-4xl text-white mb-2">Your Proximity Pulse</h1>
+        </header>
+
+        <main class="container mx-auto px-6 py-12">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-2xl p-8 shadow-lg text-center">
+                    <div id="result-content"></div>
+                    <div class="mt-8 space-y-4">
+                        <button onclick="goHome()" class="w-full bg-terracotta text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
+                            Take Another Tool
+                        </button>
+                        <button onclick="showThankYou()" class="w-full bg-deep-ink text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
+                            Get More Support →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Goal Filter Screen -->
+    <div id="goal-filter" class="min-h-screen hidden">
+        <header class="bg-gradient-to-r from-lavender to-purple-400 p-6 text-center">
+            <h1 class="font-serif text-4xl text-white mb-2">🎯 Goal Filter</h1>
+            <p class="text-ivory">Let's align your circle with your dreams</p>
+        </header>
+
+        <main class="container mx-auto px-6 py-12">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <div id="goal-step-1">
+                        <h3 class="font-serif text-2xl mb-6 text-center">What's your current goal?</h3>
+                        <textarea id="goal-input" placeholder="e.g., Launch my creative business, Write a book, Find my life purpose..." class="w-full p-4 border-2 border-gray-200 rounded-lg focus:border-lavender focus:outline-none resize-none h-24"></textarea>
+                        <button onclick="nextGoalStep()" class="w-full mt-6 bg-lavender text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
+                            Next →
+                        </button>
+                    </div>
+
+                    <div id="goal-step-2" class="hidden">
+                        <h3 class="font-serif text-2xl mb-6 text-center">What's your biggest blocker?</h3>
+                        <div class="space-y-4">
+                            <button onclick="selectBlocker('fear')" class="w-full p-4 text-left bg-gray-50 hover:bg-lavender hover:text-white rounded-lg transition-colors">
+                                Fear and self-doubt
+                            </button>
+                            <button onclick="selectBlocker('distractions')" class="w-full p-4 text-left bg-gray-50 hover:bg-lavender hover:text-white rounded-lg transition-colors">
+                                Too many distractions and shiny objects
+                            </button>
+                            <button onclick="selectBlocker('wrong-crowd')" class="w-full p-4 text-left bg-gray-50 hover:bg-lavender hover:text-white rounded-lg transition-colors">
+                                Being around people who don't get it
+                            </button>
+                            <button onclick="selectBlocker('overwhelm')" class="w-full p-4 text-left bg-gray-50 hover:bg-lavender hover:text-white rounded-lg transition-colors">
+                                Feeling overwhelmed and scattered
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button onclick="goHome()" class="text-lavender hover:text-deep-ink font-medium">← Back to Home</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Goal Results Screen -->
+    <div id="goal-results" class="min-h-screen hidden">
+        <header class="bg-gradient-to-r from-lavender to-purple-400 p-6 text-center">
+            <h1 class="font-serif text-4xl text-white mb-2">Your Personalized Insight</h1>
+        </header>
+
+        <main class="container mx-auto px-6 py-12">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <div id="goal-insight-content"></div>
+                    <div class="mt-8 space-y-4">
+                        <button onclick="goHome()" class="w-full bg-lavender text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
+                            Try Another Tool
+                        </button>
+                        <button onclick="showThankYou()" class="w-full bg-deep-ink text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
+                            Get More Support →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Daily Win Screen -->
+    <div id="daily-win" class="min-h-screen hidden">
+        <header class="bg-gradient-to-r from-yellow-400 to-orange-400 p-6 text-center">
+            <h1 class="font-serif text-4xl text-white mb-2">🚀 Daily Win Generator</h1>
+            <p class="text-ivory">One tap, one shift in energy</p>
+        </header>
+
+        <main class="container mx-auto px-6 py-12">
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <p class="text-xl mb-8 text-gray-600">Ready for your personalized nudge?</p>
+                    <button onclick="generateDailyWin()" class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white py-4 px-8 rounded-full text-xl font-medium hover:shadow-lg transition-shadow">
+                        ✨ Generate My Daily Win
+                    </button>
+                    
+                    <div id="daily-win-result" class="hidden mt-8 p-6 bg-soft-gold rounded-lg">
+                        <h3 class="font-serif text-2xl mb-4 text-deep-ink">Your Daily Win:</h3>
+                        <p id="daily-win-text" class="text-lg text-deep-ink mb-6"></p>
+                        <button onclick="generateDailyWin()" class="bg-terracotta text-white py-2 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
+                            Get Another Win
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-8 space-y-4">
+                    <button onclick="goHome()" class="text-orange-500 hover:text-deep-ink font-medium">← Back to Home</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Law of Proximity Info Modal -->
+    <div id="law-info-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl max-h-96 overflow-y-auto">
+            <h2 class="font-serif text-3xl mb-6 text-terracotta text-center">What is the Law of Proximity?</h2>
+            <div class="space-y-4 text-gray-700">
+                <p>The Law of Proximity states that <strong>you become who you spend time with</strong> and are influenced by the environments you frequent.</p>
+                <p>This isn't just about people - it includes:</p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li>The content you consume (books, podcasts, social media)</li>
+                    <li>The physical spaces you inhabit</li>
+                    <li>The conversations you engage in</li>
+                    <li>The energy you surround yourself with</li>
+                </ul>
+                <p class="font-medium text-terracotta">When you intentionally shift your proximity, you shift your trajectory.</p>
+            </div>
+            <button onclick="hideLawInfo()" class="w-full mt-6 bg-terracotta text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
+                Got it! ✨
+            </button>
+        </div>
+    </div>
+
+    <!-- Thank You Screen -->
+    <div id="thank-you" class="min-h-screen hidden">
+        <header class="bg-gradient-to-r from-terracotta via-lavender to-soft-gold p-6 text-center">
+            <h1 class="font-serif text-4xl md:text-6xl text-white mb-4">You just shifted your energy.</h1>
+            <p class="text-2xl text-ivory font-script">That's momentum. ✨</p>
+        </header>
+
+        <main class="container mx-auto px-6 py-12 text-center">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <p class="text-xl mb-8 text-gray-600">Every small shift in proximity creates ripples of change in your life.</p>
+                    <div class="space-y-4">
+                        <button onclick="window.open('#', '_blank')" class="w-full bg-gradient-to-r from-terracotta to-lavender text-white py-4 px-6 rounded-lg hover:shadow-lg transition-shadow text-lg font-medium">
+                            👉 Take the Next Step → Empathic AI Solutions Shop
+                        </button>
+                        <button onclick="goHome()" class="w-full border-2 border-terracotta text-terracotta py-3 px-6 rounded-lg hover:bg-terracotta hover:text-white transition-colors">
+                            Use Another Tool
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Global variables
+        let proximityAnswers = {};
+        let currentQuestion = 1;
+        let userGoal = '';
+        let userBlocker = '';
+
+        // Daily win options
+        const dailyWins = [
+            "Message someone who embodies your next level.",
+            "Spend 10 minutes in a space that lifts your energy.",
+            "Replace one draining input with a nourishing one.",
+            "Unfollow 3 accounts that make you feel 'less than'.",
+            "Text someone who believes in your dreams.",
+            "Listen to a podcast that expands your thinking.",
+            "Spend time in nature to reset your energy.",
+            "Write down 3 things you're grateful for right now.",
+            "Reach out to someone doing what you want to do.",
+            "Create a boundary with someone who drains you.",
+            "Join a community aligned with your goals.",
+            "Read something that inspires your next level."
+        ];
+
+        // Navigation functions
+        function showScreen(screenId) {
+            document.querySelectorAll('[id$="-screen"], #proximity-check, #goal-filter, #goal-results, #daily-win, #thank-you').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        function goHome() {
+            showScreen('home-screen');
+            resetTools();
+        }
+
+        function resetTools() {
+            proximityAnswers = {};
+            currentQuestion = 1;
+            userGoal = '';
+            userBlocker = '';
+            document.querySelectorAll('.question-step').forEach(step => step.classList.add('hidden'));
+            document.getElementById('question-1').classList.remove('hidden');
+            document.getElementById('goal-step-1').classList.remove('hidden');
+            document.getElementById('goal-step-2').classList.add('hidden');
+            document.getElementById('daily-win-result').classList.add('hidden');
+        }
+
+        // Proximity Check functions
+        function showProximityCheck() {
+            showScreen('proximity-check');
+        }
+
+        function selectAnswer(questionNum, answer) {
+            proximityAnswers[questionNum] = answer;
+            
+            if (questionNum < 3) {
+                document.getElementById(`question-${questionNum}`).classList.add('hidden');
+                document.getElementById(`question-${questionNum + 1}`).classList.remove('hidden');
+                currentQuestion++;
+            } else {
+                showProximityResults();
+            }
+        }
+
+        function showProximityResults() {
+            const score = calculateProximityScore();
+            const result = getProximityResult(score);
+            
+            document.getElementById('results-header').className = `p-6 text-center ${result.headerClass}`;
+            document.getElementById('result-content').innerHTML = `
+                <div class="text-6xl mb-6">${result.emoji}</div>
+                <h2 class="font-serif text-3xl mb-4 ${result.textClass}">${result.title}</h2>
+                <p class="text-lg mb-6 text-gray-600">${result.description}</p>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="font-serif text-xl mb-3 text-deep-ink">Your Micro-Action:</h3>
+                    <p class="text-deep-ink font-medium">${result.action}</p>
+                </div>
+            `;
+            
+            showScreen('results-screen');
+        }
+
+        function calculateProximityScore() {
+            let score = 0;
+            Object.values(proximityAnswers).forEach(answer => {
+                if (answer === 'supportive' || answer === 'stretch' || answer === 'often') score += 2;
+                else if (answer === 'neutral' || answer === 'sometimes') score += 1;
+            });
+            return score;
+        }
+
+        function getProximityResult(score) {
+            if (score >= 5) {
+                return {
+                    emoji: '🟢',
+                    title: 'Aligned & Thriving',
+                    description: 'Your proximity is working for you! You\'re surrounded by people and environments that support your growth.',
+                    action: 'Double down on what\'s working. Spend even more time with your most inspiring connections.',
+                    headerClass: 'bg-gradient-to-r from-green-400 to-green-600',
+                    textClass: 'text-green-600'
+                };
+            } else if (score >= 3) {
+                return {
+                    emoji: '🟡',
+                    title: 'Mixed Signals',
+                    description: 'You have some supportive influences, but there\'s room to optimize your circle for faster growth.',
+                    action: 'Identify one draining relationship or environment and spend 20% less time there this week.',
+                    headerClass: 'bg-gradient-to-r from-yellow-400 to-orange-400',
+                    textClass: 'text-orange-600'
+                };
+            } else {
+                return {
+                    emoji: '🔴',
+                    title: 'Time for a Shift',
+                    description: 'Your current proximity might be holding you back. Small changes can create big momentum.',
+                    action: 'Find one person who embodies where you want to be and reach out to them this week.',
+                    headerClass: 'bg-gradient-to-r from-red-400 to-pink-500',
+                    textClass: 'text-red-500'
+                };
+            }
+        }
+
+        // Goal Filter functions
+        function showGoalFilter() {
+            showScreen('goal-filter');
+        }
+
+        function nextGoalStep() {
+            userGoal = document.getElementById('goal-input').value.trim();
+            if (userGoal) {
+                document.getElementById('goal-step-1').classList.add('hidden');
+                document.getElementById('goal-step-2').classList.remove('hidden');
+            } else {
+                alert('Please enter your goal first!');
+            }
+        }
+
+        function selectBlocker(blocker) {
+            userBlocker = blocker;
+            showGoalResults();
+        }
+
+        function showGoalResults() {
+            const insight = getGoalInsight(userGoal, userBlocker);
+            
+            document.getElementById('goal-insight-content').innerHTML = `
+                <div class="text-center mb-6">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h2 class="font-serif text-2xl mb-6 text-lavender">Your Personalized Insight</h2>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-lavender bg-opacity-10 p-6 rounded-lg">
+                        <h3 class="font-serif text-xl mb-3 text-deep-ink">To reach: "${userGoal}"</h3>
+                        <p class="text-deep-ink mb-4">${insight.focus}</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg">
+                        <h3 class="font-serif text-xl mb-3 text-red-600">Avoid This:</h3>
+                        <p class="text-deep-ink">${insight.avoid}</p>
+                    </div>
+                </div>
+            `;
+            
+            showScreen('goal-results');
+        }
+
+        function getGoalInsight(goal, blocker) {
+            const insights = {
+                'fear': {
+                    focus: 'Spend time with people who have faced similar fears and pushed through. Join communities of action-takers, not just dreamers.',
+                    avoid: 'Perfectionist environments and people who overthink everything. They\'ll keep you stuck in planning mode.'
+                },
+                'distractions': {
+                    focus: 'Surround yourself with focused, disciplined people. Find accountability partners who call out your scattered energy.',
+                    avoid: 'Social media rabbit holes and people who constantly chase the next shiny object. Unfollow accounts that make you feel behind.'
+                },
+                'wrong-crowd': {
+                    focus: 'Actively seek out your tribe - people who are already doing what you want to do or supporting others who are.',
+                    avoid: 'Spending time explaining or defending your dreams to people who don\'t get it. Save your energy for believers.'
+                },
+                'overwhelm': {
+                    focus: 'Connect with people who have mastered simplicity and focus. Learn from those who\'ve built what you want without burning out.',
+                    avoid: 'Hustle culture and people who glorify being busy. You need clarity, not more chaos.'
+                }
+            };
+            
+            return insights[blocker] || insights['fear'];
+        }
+
+        // Daily Win functions
+        function showDailyWin() {
+            showScreen('daily-win');
+        }
+
+        function generateDailyWin() {
+            const randomWin = dailyWins[Math.floor(Math.random() * dailyWins.length)];
+            document.getElementById('daily-win-text').textContent = randomWin;
+            document.getElementById('daily-win-result').classList.remove('hidden');
+        }
+
+        // Modal functions
+        function showLawInfo() {
+            document.getElementById('law-info-modal').classList.remove('hidden');
+            document.getElementById('law-info-modal').classList.add('flex');
+        }
+
+        function hideLawInfo() {
+            document.getElementById('law-info-modal').classList.add('hidden');
+            document.getElementById('law-info-modal').classList.remove('flex');
+        }
+
+        function showThankYou() {
+            showScreen('thank-you');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('law-info-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideLawInfo();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'960a664fb5e36fbf',t:'MTc1Mjc2MjIzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
